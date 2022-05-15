@@ -1,12 +1,12 @@
 package conv
 
 import (
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 type (
 	HandlerFunc func(ctx Context, update tgbotapi.Update) State
-	State       int
+	State       int64
 	States      map[State]HandlerFunc
 )
 
@@ -16,14 +16,14 @@ const (
 
 type Handler struct {
 	states       States
-	users        map[int]*conversation
+	users        map[int64]*conversation
 	entryMessage string
 }
 
 func NewHandler(entyMessage string, states States) *Handler {
 	return &Handler{
 		states:       states,
-		users:        make(map[int]*conversation, 0),
+		users:        make(map[int64]*conversation, 0),
 		entryMessage: entyMessage,
 	}
 }
